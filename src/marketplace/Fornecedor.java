@@ -21,7 +21,7 @@ public class Fornecedor extends Usuario {
 		this.descricao = descricao;
 	}
 	
-	public void setProduto(Produto produto) {
+	public void addProduto(Produto produto) {
         produtos.add(produto);
     }
 
