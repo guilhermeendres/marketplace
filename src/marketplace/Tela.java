@@ -1,6 +1,8 @@
 package marketplace;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Tela {
 
@@ -56,14 +58,19 @@ public class Tela {
 
             for (int i = 0; i < mensagens.length; i++) {
                 System.out.print(mensagens[i]);
-                entradas[i] = scanner.nextLine();
+                do {
+                    entradas[i] = scanner.nextLine();
+                    if (entradas[i].isBlank()) {
+                        System.out.print("Entrada inválida. Tente novamente: ");
+                    }
+                } while (entradas[i].isBlank());
             }
             return entradas;
         }
         return new String[0];
     }
 
-    public String requisitarOpcao(String titulo, String descricao, String opcoes[]) {
+    public int requisitarOpcao(String titulo, String descricao, String opcoes[]) {
 
         if (titulo != null && !titulo.isBlank()) {
             System.out.println(titulo);
@@ -75,6 +82,8 @@ public class Tela {
 
         if (opcoes != null && opcoes.length > 0) {
 
+            int opcaoSelecionada = 0;
+
             StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < opcoes.length; i++) {
@@ -83,14 +92,19 @@ public class Tela {
 
             System.out.print(sb.toString());
 
-            String opcao = scanner.nextLine().trim();
+            do {
+                opcaoSelecionada = receberOpcao(scanner.nextLine().trim());
+                if (opcaoSelecionada <= 0) {
+                    System.out.println("Opção inválida. Tente novamente.");
+                }
+            } while (opcaoSelecionada <= 0);
 
-            return opcao;
+            return opcaoSelecionada;
         }
-        return "0";
+        return 0;
     }
 
-    public String requisitarOpcao(String titulo, String opcoes[]) {
+    public int requisitarOpcao(String titulo, String opcoes[]) {
 
         if (titulo != null && !titulo.isBlank()) {
             System.out.println(titulo);
@@ -98,6 +112,8 @@ public class Tela {
 
         if (opcoes != null && opcoes.length > 0) {
 
+            int opcaoSelecionada = 0;
+
             StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < opcoes.length; i++) {
@@ -106,17 +122,24 @@ public class Tela {
 
             System.out.print(sb.toString());
 
-            String opcao = scanner.nextLine().trim();
+            do {
+                opcaoSelecionada = receberOpcao(scanner.nextLine().trim());
+                if (opcaoSelecionada <= 0) {
+                    System.out.println("Opção inválida. Tente novamente.");
+                }
+            } while (opcaoSelecionada <= 0);
 
-            return opcao;
+            return opcaoSelecionada;
         }
-        return "0";
+        return 0;
     }
 
-    public String requisitarOpcao(String opcoes[]) {
+    public int requisitarOpcao(String opcoes[]) {
 
         if (opcoes != null && opcoes.length > 0) {
 
+            int opcaoSelecionada = 0;
+
             StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < opcoes.length; i++) {
@@ -125,11 +148,16 @@ public class Tela {
 
             System.out.print(sb.toString());
 
-            String opcao = scanner.nextLine().trim();
+            do {
+                opcaoSelecionada = receberOpcao(scanner.nextLine().trim());
+                if (opcaoSelecionada <= 0) {
+                    System.out.println("Opção inválida. Tente novamente.");
+                }
+            } while (opcaoSelecionada <= 0);
 
-            return opcao;
+            return opcaoSelecionada;
         }
-        return "0";
+        return 0;
     }
 
     public void mostrarMensagem(String mensagem) {
@@ -137,5 +165,29 @@ public class Tela {
         if (mensagem != null && !mensagem.isBlank()) {
             System.out.println(mensagem);
         }
+    }
+
+    /**
+     * Método para receber um número inteiro de uma string
+     *
+     * @param entrada
+     * @return o número inteiro encontrado na string ou 0 se não houver
+     */
+    private int receberOpcao(String entrada) {
+        /**
+         * Cria um padrão regex para encontrar números inteiros na entrada
+         *
+         * Deve tratar: - Entradas sem números - Entradas com números misturados
+         * com letras - Entradas com espaços em branco - Entradas vazias ou
+         * nulas
+         */
+        Pattern pattern = Pattern.compile("\\d+"); // \\d+ encontra um ou mais dígitos consecutivos
+        Matcher matcher = pattern.matcher(entrada); // faz a busca usando o padrão definido
+        if (entrada != null && !entrada.trim().isEmpty()) {
+            if (matcher.find()) {
+                return Integer.parseInt(matcher.group());
+            }
+        }
+        return 0;
     }
 }
