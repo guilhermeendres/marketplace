@@ -1,29 +1,17 @@
 package marketplace;
 
 import java.util.List;
+import java.util.ArrayList;
 
-public class Fornecedor {
+public class Fornecedor extends Usuario {
 	
-	private String nome;
 	private String descricao;
-	private String email;
-	private String telefone;
-	private Endereco endereco;
 	private List<Produto> produtos;
 	
-	public Fornecedor(String nome, String descricao, String email, String telefone, Endereco endereco) {
-		this.nome = nome;
+	public Fornecedor(Usuario usuario, String descricao) {
+		super(usuario.getNome(), usuario.getTelefone(), usuario.getEmail(), usuario.getSenha(), usuario.getEndereco());
 		this.descricao = descricao;
-		this.email = email;
-        this.telefone = telefone;
-        this.endereco = endereco;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
+		this.produtos = new ArrayList<>();
 	}
 	
 	public String getDescricao() {
@@ -33,28 +21,7 @@ public class Fornecedor {
 		this.descricao = descricao;
 	}
 	
-	public String getTelefone() {
-		return telefone;
-	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-	public void addProduto(Produto produto) {
+	public void setProduto(Produto produto) {
         produtos.add(produto);
     }
 
@@ -69,9 +36,9 @@ public class Fornecedor {
 	
 	@Override
 	public String toString() {
-		return ("\nFornecedor: " + this.nome + 
-				"\nDescrição: " + this.descricao +
-				"\nTelefone: " + this.telefone + " E-mail: " + this.email);
+		return ("\nFornecedor: " + this.getNome() + 
+				"\nDescrição: " + this.getDescricao() +
+				"\nTelefone: " + this.getTelefone() + " E-mail: " + this.getEmail());
 	}
 
 }
