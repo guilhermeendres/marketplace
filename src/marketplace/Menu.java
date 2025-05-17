@@ -2,53 +2,13 @@ package marketplace;
 
 public class Menu {
 
-    // private enum State {
-    //     INICIO,
-    //     CADASTRO,
-    //     LOGIN,
-    //     NULO,
-    // }
-    private enum NivelAcesso {
-        ADMIN,
-        USUARIO,
-    }
-
-    // private State estadoAnterior;
-    // private State estadoAtual;
-    // private State estadoProximo;
     private Tela tela;
 
     public Menu() {
-        // estadoAnterior = State.NULO;
-        // estadoAtual = State.NULO;
-        // estadoProximo = State.INICIO;
         tela = new Tela();
     }
 
-    public void run() {
-        // if (estadoAtual != estadoProximo) {
-        //     estadoAnterior = estadoAtual;
-        //     estadoAtual = estadoProximo;
-        // }
-
-        switch (inicio()) {
-            case 1 -> {
-
-            }
-            case 2 -> {
-
-            }
-            case 3 -> {
-
-            }
-            default -> {
-                System.out.println("Erro"); // adicionar tratamento de exceções se sobrar tempo
-                exit();
-            }
-        }
-    }
-
-    private int inicio() {
+    public int inicio() {
 
         return (tela.requisitarOpcao(
                 "Início",
@@ -61,9 +21,56 @@ public class Menu {
         ));
     }
 
-    private void exit() {
-        System.out.println("Saindo...");
-        System.exit(0);
+    public int autenticacao() {
+        return (tela.requisitarOpcao(
+                "Autenticação",
+                "Faça login ou cadastre-se",
+                new String[]{
+                    "Sair",
+                    "Login",
+                    "Cadastro"
+                }
+        ));
     }
 
+    public int selecaoTipoCadastro() {
+        return (tela.requisitarOpcao(
+                "Cadastro",
+                "Selecione o tipo de cadastro",
+                new String[]{
+                    "Sair",
+                    "Fornecedor",
+                    "Cliente"
+                }
+        ));
+    }
+
+    public String[] cadastro(Usuario usuario) {
+        tela.mostrarMensagem("Preencha os dados do usuário");
+        return (tela.requisitarTexto(
+                new String[]{
+                    "Nome: ",
+                    "Telefone: ",
+                    "E-mail: ",
+                    "Senha: ",
+                    "Rua: ",
+                    "Número: ",
+                    "Complemento: ",
+                    "Bairro: ",
+                    "CEP:",
+                    "Cidade: ",
+                    "Estado: ",
+                    usuario instanceof Fornecedor ? "Descrição: " : "Cartão de crédito: "
+                }
+        ));
+    }
+
+    public String[] login() {
+        return (tela.requisitarTexto(
+                new String[]{
+                    "E-mail: ",
+                    "Senha: "
+                }
+        ));
+    }
 }
