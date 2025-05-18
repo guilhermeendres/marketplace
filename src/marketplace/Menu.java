@@ -76,15 +76,25 @@ public class Menu {
     }
 
     public int dashboard(Usuario tipoUsuario) {
-        return (tela.requisitarOpcao(
+        return tela.requisitarOpcao(
                 "Dashboard",
                 "Selecione uma opção",
-                new String[]{
+                tipoUsuario instanceof Admin ? new String[]{
                     "Voltar",
-                    "Comprar",
-                    "Vender",
-                    "Gerenciar Estoque"
-                }
-        ));
+                    "Gerenciar Fornecedores",
+                    "Gerenciar Clientes",
+                    "Gerenciar Produtos"
+                } : tipoUsuario instanceof Fornecedor ? new String[]{
+                    "Voltar",
+                    "Adicionar Produto",
+                    "Remover Produto",
+                    "Listar Produtos"
+                } : tipoUsuario instanceof Cliente ? new String[]{
+                    "Voltar",
+                    "Buscar Produto",
+                    "Ver Pedidos"
+                } : new String[]{}
+        );
     }
+
 }

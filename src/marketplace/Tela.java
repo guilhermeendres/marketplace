@@ -9,11 +9,9 @@ public class Tela {
     private static final Scanner scanner = new Scanner(System.in);
 
     public String[] requisitarTexto(String titulo, String descricao, String mensagens[]) {
-
         if (titulo != null && !titulo.isBlank()) {
             System.out.println(titulo);
         }
-
         if (descricao != null && !descricao.isBlank()) {
             System.out.println(descricao);
         }
@@ -23,8 +21,16 @@ public class Tela {
             String[] entradas = new String[mensagens.length];
 
             for (int i = 0; i < mensagens.length; i++) {
+                if (mensagens[i] == null || mensagens[i].isBlank()) {
+                    break;
+                }
                 System.out.print(mensagens[i]);
-                entradas[i] = scanner.nextLine();
+                do {
+                    entradas[i] = scanner.nextLine();
+                    if (entradas[i].isBlank()) {
+                        System.out.print("Entrada inválida. Tente novamente: ");
+                    }
+                } while (entradas[i].isBlank());
             }
             return entradas;
         }
@@ -32,7 +38,6 @@ public class Tela {
     }
 
     public String[] requisitarTexto(String titulo, String mensagens[]) {
-
         if (titulo != null && !titulo.isBlank()) {
             System.out.println(titulo);
         }
@@ -42,8 +47,16 @@ public class Tela {
             String[] entradas = new String[mensagens.length];
 
             for (int i = 0; i < mensagens.length; i++) {
+                if (mensagens[i] == null || mensagens[i].isBlank()) {
+                    break;
+                }
                 System.out.print(mensagens[i]);
-                entradas[i] = scanner.nextLine();
+                do {
+                    entradas[i] = scanner.nextLine();
+                    if (entradas[i].isBlank()) {
+                        System.out.print("Entrada inválida. Tente novamente: ");
+                    }
+                } while (entradas[i].isBlank());
             }
             return entradas;
         }
@@ -57,6 +70,9 @@ public class Tela {
             String[] entradas = new String[mensagens.length];
 
             for (int i = 0; i < mensagens.length; i++) {
+                if (mensagens[i] == null || mensagens[i].isBlank()) {
+                    break;
+                }
                 System.out.print(mensagens[i]);
                 do {
                     entradas[i] = scanner.nextLine();

@@ -13,6 +13,7 @@ public class Loja {
     public Loja() {
         this.clientes = new ArrayList<>();
         this.fornecedores = new ArrayList<>();
+        this.admins = new ArrayList<>();
         this.estoque = new Estoque();
     }
 
@@ -34,8 +35,9 @@ public class Loja {
     }
 
     public Usuario procurarCadastro(String[] login) {
+
         if (login == null || login.length < 2) {
-            return null;
+            return new Usuario();
         }
 
         String email = login[0];
@@ -65,6 +67,6 @@ public class Loja {
             }
         }
 
-        return null;
+        return new Usuario();
     }
 }

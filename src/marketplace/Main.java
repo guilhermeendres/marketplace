@@ -4,119 +4,175 @@ import marketplace.Menu.TipoUsuario;
 
 public class Main {
 
-    private enum State {
+    private enum MainState {
         INICIO,
         LOGIN,
         CADASTRO,
-        AÇÃO,
         SAIR
     }
+
+    private enum ClienteState {
+        BUSCA,
+        PEDIDOS,
+        COMPRA,
+        CANCELA_COMPRA,
+    }
+
+    private enum FornecedorState {
+        ADICIONAR,
+        PEDIDOS,
+        CANCELA_PEDIDO,
+    }
+
+    private enum AdminState {
+        PRODUTOS,
+        USUARIOS,
+        PEDIDOS,
+        CANCELA_PEDIDO,
+    }
+
     private Loja loja;
     private Menu menu;
-    private State state;
+    private MainState mainState;
     private Usuario usuario;
 
     private Main() {
         this.loja = new Loja();
         this.menu = new Menu();
-        this.state = State.INICIO;
+        this.mainState = MainState.INICIO;
     }
 
     public static void main(String[] args) {
         Main app = new Main();
 
         while (true) {
-            app.stateMachine(app);
+            app.mainStateMachine();
         }
 
     }
 
-    private void stateMachine(Main app) {
-        switch (app.state) {
+    private void mainStateMachine() {
+        switch (this.mainState) {
             case INICIO -> {
-                switch (app.menu.autenticacao()) {
+                switch (this.menu.autenticacao()) {
                     case 2 -> {
-                        app.state = State.LOGIN;
+                        this.mainState = MainState.LOGIN;
                     }
                     case 3 -> {
-                        app.state = State.CADASTRO;
+                        this.mainState = MainState.CADASTRO;
                     }
                     default -> {
-                        app.state = State.SAIR;
+                        this.mainState = MainState.SAIR;
                     }
                 }
             }
             case LOGIN -> {
-                switch (app.loja.procurarCadastro(app.menu.login())) {
+                switch (this.loja.procurarCadastro(this.menu.login())) {
 
                     case Admin admin -> {
                         usuario = admin;
-                        app.state = State.AÇÃO;
+                        this.adminStateMachine((Admin) usuario);
                     }
                     case Fornecedor fornecedor -> {
                         usuario = fornecedor;
-                        app.state = State.AÇÃO;
+                        this.fornecedorStateMachine((Fornecedor) usuario);
                     }
                     case Cliente cliente -> {
                         usuario = cliente;
-                        app.state = State.AÇÃO;
+                        this.clienteStateMachine((Cliente) usuario);
                     }
                     default -> {
-                        app.state = State.INICIO;
+                        switch (this.menu.retry("Usuário não encontrado")) {
+                            case 2 -> {
+                                this.mainState = MainState.LOGIN;
+                            }
+                            default -> {
+                                this.mainState = MainState.INICIO;
+                            }
+
+                        }
                     }
                 }
 
             }
             case CADASTRO -> {
-                switch (app.menu.selecaoTipoUsuario()) {
+                switch (this.menu.selecaoTipoUsuario()) {
                     case 2 -> {
-                        usuario = new Admin();
+                        usuario = new Admin(this.menu.cadastro(new Admin()));
                     }
                     case 3 -> {
-                        usuario = new Cliente();
+                        usuario = new Cliente(this.menu.cadastro(new Cliente()));
                     }
                     case 4 -> {
-                        usuario = new Fornecedor();
+                        usuario = new Fornecedor(this.menu.cadastro(new Fornecedor()));
                     }
                     default -> {
-                        app.state = State.INICIO;
+                        this.mainState = MainState.INICIO;
                     }
                 }
-                app.loja.addUsuario(usuario);
-            }
-
-            case AÇÃO -> {
-
-                switch (app.menu.dashboard()) {
-                    case 1 -> {
-                    }
+                if (mainState != MainState.INICIO) {
+                    this.loja.addUsuario(usuario);
                 }
+                this.mainState = MainState.INICIO;
             }
+
             case SAIR -> {
                 System.exit(0);
             }
         }
+    }
 
-        // switch (app.menu.inicio()) {
-        //     case 1 -> { System.exit(0); } // Sair
-        //     case 2 -> { String login[] = app.menu.login(); }
-        //     case 3 -> {
-        //         switch(app.menu.autenticacao()) {
-        //             case 1 -> { System.exit(0); } // Sair
-        //             case 2 -> { String login[] = app.menu.login(); }
-        //             case 3 -> {
-        //                 switch(app.menu.selecaoTipoCadastro()) {
-        //                     case 1 -> { System.exit(0); } // Sair
-        //                     case 2 -> { 
-        //                         app.loja.addFornecedor(new Fornecedor(app.menu.cadastro(TipoUsuario.FORNECEDOR))); 
-        //                     }
-        //                     case 3 -> { 
-        //                         app.loja.addCliente(new Cliente(app.menu.cadastro(TipoUsuario.CLIENTE)));
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+    private void clienteStateMachine(Cliente cliente) {
+        switch (this.menu.dashboard(usuario)) {
+            case 2 -> {
+                cliente.
+            }
+            case 3 -> {
+                this.loja.verPedidos();
+            }
+            case 4 -> {
+                this.loja.comprarProduto(this.menu.compraProduto());
+            }
+            case 5 -> {
+                this.loja.cancelarCompra(this.menu.cancelarCompra());
+            }
+            default -> {
+            }
+        }
+    }
+
+    private void fornecedorStateMachine(Fornecedor fornecedor) {
+        switch (this.menu.dashboard(usuario)) {
+            case 2 -> {
+                this.loja.adicionarProduto(this.menu.adicionarProduto());
+            }
+            case 3 -> {
+                this.loja.verPedidos();
+            }
+            case 4 -> {
+                this.loja.cancelarPedido(this.menu.cancelarPedido());
+            }
+            default -> {
+            }
+        }
+    }
+
+    private void adminStateMachine(Admin admin) {
+        switch (this.menu.dashboard(usuario)) {
+            case 2 -> {
+                this.loja.adicionarProduto(this.menu.adicionarProduto());
+            }
+            case 3 -> {
+                this.loja.verUsuarios();
+            }
+            case 4 -> {
+                this.loja.verPedidos();
+            }
+            case 5 -> {
+                this.loja.cancelarPedido(this.menu.cancelarPedido());
+            }
+            default -> {
+            }
+        }
     }
 }
