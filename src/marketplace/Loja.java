@@ -8,13 +8,15 @@ public class Loja {
     private List<Cliente> clientes;
     private List<Fornecedor> fornecedores;
     private List<Admin> admins;
-    private Estoque estoque;
+    private List<Estoque> estoques;
+    private List<Produto> produtos = new ArrayList<>();
 
     public Loja() {
         this.clientes = new ArrayList<>();
         this.fornecedores = new ArrayList<>();
         this.admins = new ArrayList<>();
-        this.estoque = new Estoque();
+        this.estoques = new ArrayList<>();
+        this.produtos = new ArrayList<>();
     }
 
     public boolean addUsuario(Usuario usuario) {
@@ -68,5 +70,33 @@ public class Loja {
         }
 
         return new Usuario();
+    }
+
+    public void addProduto(Produto produto) {
+        if (produto != null) {
+            produtos.add(produto);
+
+        }
+    }
+
+    public void addRegistroEstoque(Produto produto, int quantidade, double preco) {
+        if (produto != null) {
+            Estoque novoEstoque = new Estoque();
+            novoEstoque.setProduto(produto);
+            novoEstoque.setQuantidade(quantidade);
+            novoEstoque.setPreco(preco);
+            this.estoques.add(novoEstoque);
+        }
+    }
+
+    public void atualizarRegistroEstoque(Produto produto, int quantidade, double preco) {
+        if (produto != null) {
+            for (Estoque registroEstoque : this.estoques) {
+                if (registroEstoque.getProduto().getCodigo() == produto.getCodigo()) {
+                    registroEstoque.setQuantidade(quantidade);
+                    registroEstoque.setPreco(preco);
+                }
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ public class Cliente extends Usuario {
 
     private String cartaoCredito;
     private List<Pedido> pedidos;
+    private Loja loja;
 
     public Cliente(Usuario usuario, String cartaoCredito) {
         super(usuario.getNome(), usuario.getTelefone(), usuario.getEmail(), usuario.getSenha(), usuario.getEndereco());

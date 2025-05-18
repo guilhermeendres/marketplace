@@ -124,55 +124,19 @@ public class Main {
 
     private void clienteStateMachine(Cliente cliente) {
         switch (this.menu.dashboard(usuario)) {
-            case 2 -> {
-                cliente.
-            }
-            case 3 -> {
-                this.loja.verPedidos();
-            }
-            case 4 -> {
-                this.loja.comprarProduto(this.menu.compraProduto());
-            }
-            case 5 -> {
-                this.loja.cancelarCompra(this.menu.cancelarCompra());
-            }
-            default -> {
-            }
+
         }
     }
 
     private void fornecedorStateMachine(Fornecedor fornecedor) {
         switch (this.menu.dashboard(usuario)) {
-            case 2 -> {
-                this.loja.adicionarProduto(this.menu.adicionarProduto());
-            }
-            case 3 -> {
-                this.loja.verPedidos();
-            }
-            case 4 -> {
-                this.loja.cancelarPedido(this.menu.cancelarPedido());
-            }
-            default -> {
-            }
+
         }
     }
 
     private void adminStateMachine(Admin admin) {
         switch (this.menu.dashboard(usuario)) {
-            case 2 -> {
-                this.loja.adicionarProduto(this.menu.adicionarProduto());
-            }
-            case 3 -> {
-                this.loja.verUsuarios();
-            }
-            case 4 -> {
-                this.loja.verPedidos();
-            }
-            case 5 -> {
-                this.loja.cancelarPedido(this.menu.cancelarPedido());
-            }
-            default -> {
-            }
+
         }
     }
 }

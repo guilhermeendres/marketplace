@@ -97,4 +97,11 @@ public class Menu {
         );
     }
 
+    public String[] buscaProduto() {
+        return (tela.requisitarTexto(
+                "Buscar Produto",
+                new String[]{"Digite o nome do produto que deseja buscar: "}
+        ));
+    }
+
 }
