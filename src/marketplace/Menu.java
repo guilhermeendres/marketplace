@@ -8,19 +8,6 @@ public class Menu {
         tela = new Tela();
     }
 
-    public int inicio() {
-
-        return (tela.requisitarOpcao(
-                "Início",
-                "Selecione o nível de acesso",
-                new String[]{
-                    "Sair",
-                    "Admin",
-                    "Usuário"
-                }
-        ));
-    }
-
     public int autenticacao() {
         return (tela.requisitarOpcao(
                 "Autenticação",
@@ -33,19 +20,20 @@ public class Menu {
         ));
     }
 
-    public int selecaoTipoCadastro() {
+    public int selecaoTipoUsuario() {
         return (tela.requisitarOpcao(
                 "Cadastro",
                 "Selecione o tipo de cadastro",
                 new String[]{
-                    "Sair",
-                    "Fornecedor",
-                    "Cliente"
+                    "Voltar",
+                    "Admin",
+                    "Cliente",
+                    "Fornecedor"
                 }
         ));
     }
 
-    public String[] cadastro(Usuario usuario) {
+    public String[] cadastro(Usuario tipoUsuario) {
         tela.mostrarMensagem("Preencha os dados do usuário");
         return (tela.requisitarTexto(
                 new String[]{
@@ -60,7 +48,7 @@ public class Menu {
                     "CEP:",
                     "Cidade: ",
                     "Estado: ",
-                    usuario instanceof Fornecedor ? "Descrição: " : "Cartão de crédito: "
+                    tipoUsuario instanceof Fornecedor ? "Descrição: " : tipoUsuario instanceof Cliente ? "Cartão de Crédito: " : ""
                 }
         ));
     }
@@ -76,7 +64,27 @@ public class Menu {
         ));
     }
 
-    public void dashboard() { //Tela de acao
+    public int retry(String mensagem) {
+        return (tela.requisitarOpcao(
+                "Erro",
+                mensagem,
+                new String[]{
+                    "Voltar",
+                    "Tentar novamente"
+                }
+        ));
+    }
 
+    public int dashboard(Usuario tipoUsuario) {
+        return (tela.requisitarOpcao(
+                "Dashboard",
+                "Selecione uma opção",
+                new String[]{
+                    "Voltar",
+                    "Comprar",
+                    "Vender",
+                    "Gerenciar Estoque"
+                }
+        ));
     }
 }

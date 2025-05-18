@@ -24,6 +24,14 @@ public class Usuario {
         this.endereco = new Endereco();
     }
 
+    public Usuario(String params[]) {
+        this.nome = params[0];
+        this.telefone = params[1];
+        this.email = params[2];
+        this.senha = params[3];
+        this.endereco = new Endereco(params[4], params[5], params[6], params[7], params[8], params[9], params[10]);
+    }
+
     public String getNome() {
         return nome;
     }

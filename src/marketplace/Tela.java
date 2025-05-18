@@ -94,10 +94,10 @@ public class Tela {
 
             do {
                 opcaoSelecionada = receberOpcao(scanner.nextLine().trim());
-                if (opcaoSelecionada <= 0) {
+                if (opcaoSelecionada <= 0 || opcaoSelecionada > opcoes.length) {
                     System.out.println("Opção inválida. Tente novamente.");
                 }
-            } while (opcaoSelecionada <= 0);
+            } while (opcaoSelecionada <= 0 || opcaoSelecionada > opcoes.length);
 
             return opcaoSelecionada;
         }
@@ -124,10 +124,10 @@ public class Tela {
 
             do {
                 opcaoSelecionada = receberOpcao(scanner.nextLine().trim());
-                if (opcaoSelecionada <= 0) {
+                if (opcaoSelecionada <= 0 || opcaoSelecionada > opcoes.length) {
                     System.out.println("Opção inválida. Tente novamente.");
                 }
-            } while (opcaoSelecionada <= 0);
+            } while (opcaoSelecionada <= 0 || opcaoSelecionada > opcoes.length);
 
             return opcaoSelecionada;
         }
@@ -150,10 +150,10 @@ public class Tela {
 
             do {
                 opcaoSelecionada = receberOpcao(scanner.nextLine().trim());
-                if (opcaoSelecionada <= 0) {
+                if (opcaoSelecionada <= 0 || opcaoSelecionada > opcoes.length) {
                     System.out.println("Opção inválida. Tente novamente.");
                 }
-            } while (opcaoSelecionada <= 0);
+            } while (opcaoSelecionada <= 0 || opcaoSelecionada > opcoes.length);
 
             return opcaoSelecionada;
         }
