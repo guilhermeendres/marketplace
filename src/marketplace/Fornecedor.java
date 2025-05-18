@@ -13,6 +13,12 @@ public class Fornecedor extends Usuario {
 		this.descricao = descricao;
 		this.produtos = new ArrayList<>();
 	}
+
+	public Fornecedor() {
+		super();
+		this.descricao = "";
+		this.produtos = new ArrayList<>();
+	}
 	
 	public String getDescricao() {
 		return descricao;

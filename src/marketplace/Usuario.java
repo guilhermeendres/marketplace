@@ -16,6 +16,14 @@ public class Usuario {
         this.endereco = endereco;
     }
 
+    public Usuario() {
+        this.nome = "";
+        this.telefone = "";
+        this.email = "";
+        this.senha = "";
+        this.endereco = new Endereco();
+    }
+
     public String getNome() {
         return nome;
     }

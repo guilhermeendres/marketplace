@@ -14,6 +14,12 @@ public class Cliente extends Usuario {
         this.pedidos = new ArrayList<>();
     }
 
+    public Cliente() {
+        super();
+        this.cartaoCredito = "";
+        this.pedidos = new ArrayList<>();
+    }
+
     public void addPedido(Pedido pedido) {
         pedidos.add(pedido);
     }

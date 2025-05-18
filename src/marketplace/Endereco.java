@@ -20,6 +20,16 @@ public class Endereco {
         this.estado = estado;
     }
 
+    public Endereco() {
+        this.rua = "";
+        this.numero = "";
+        this.complemento = "";
+        this.bairro = "";
+        this.cep = "";
+        this.cidade = "";
+        this.estado = "";
+    }
+
     public String getRua() {
         return rua;
     }

@@ -67,10 +67,16 @@ public class Menu {
 
     public String[] login() {
         return (tela.requisitarTexto(
+                "Login",
+                "Por favor, insira seu e-mail e senha",
                 new String[]{
                     "E-mail: ",
                     "Senha: "
                 }
         ));
+    }
+
+    public void dashboard() { //Tela de acao
+
     }
 }
