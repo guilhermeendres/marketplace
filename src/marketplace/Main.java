@@ -1,6 +1,6 @@
 package marketplace;
 
-import marketplace.Menu.TipoUsuario;
+import java.util.Scanner;
 
 public class Main {
 
@@ -73,10 +73,6 @@ public class Main {
                         usuario = admin;
                         this.adminStateMachine((Admin) usuario);
                     }
-                    case Fornecedor fornecedor -> {
-                        usuario = fornecedor;
-                        this.fornecedorStateMachine((Fornecedor) usuario);
-                    }
                     case Cliente cliente -> {
                         usuario = cliente;
                         this.clienteStateMachine((Cliente) usuario);
@@ -103,9 +99,6 @@ public class Main {
                     case 3 -> {
                         usuario = new Cliente(this.menu.cadastro(new Cliente()));
                     }
-                    case 4 -> {
-                        usuario = new Fornecedor(this.menu.cadastro(new Fornecedor()));
-                    }
                     default -> {
                         this.mainState = MainState.INICIO;
                     }
@@ -128,15 +121,148 @@ public class Main {
         }
     }
 
-    private void fornecedorStateMachine(Fornecedor fornecedor) {
-        switch (this.menu.dashboard(usuario)) {
-
+    private void adminStateMachine(Admin admin) {
+        switch (this.menu.dashboard(admin)) {
+        	case 2:
+        		switch(menu.telaFornecedores()) {
+        			case 2:
+        				cadastrarFornecedor();
+        				break;
+        			case 3:
+        				alterarFornecedor();
+        				break;
+        			case 4:
+        				removerFornecedor();
+        				break;
+        			case 5:
+        				listarFornecedores();
+        				break;
+        			case 6:
+        				Scanner sc = new Scanner(System.in);
+        				switch(menu.telaBuscaFronecedor()) {
+        					case 2:
+        						System.out.println("\nDigite o nome do fornecedor: ");
+        						String nome = sc.nextLine();
+        						Fornecedor f1 = buscarForPorNome(nome);
+        						if (f1 != null) {
+        							f1.toString();
+        				        } else {
+        				            System.out.println("Fornecedor não encontrado!");
+        				        }
+        						break;
+        					case 3:
+        						System.out.println("\nDigite o cnpj do fornecedor: ");
+        						String cnpj = sc.nextLine();
+        						Fornecedor f2 = buscarForPorCNPJ(cnpj);
+        						if (f2 != null) {
+        							f2.toString();
+        				        } else {
+        				            System.out.println("Fornecedor não encontrado!");
+        				        }
+        						break;
+        				}
+        				sc.close();
+        				break;
+        		}
         }
     }
+    
+    public Fornecedor buscarForPorNome(String nome) {
+        for (Fornecedor f : loja.getFornecedores()) {
+            if (f.getNome().equalsIgnoreCase(nome)) {
+            	return f;
+            }
+        }
+        return null;
+    }
+    
+    public Fornecedor buscarForPorCNPJ(String cnpj) {
+        for (Fornecedor f : loja.getFornecedores()) {
+            if (f.getCnpj().equalsIgnoreCase(cnpj)) {
+            	return f;
+            }
+        }
+        return null;
+    }
+    
+    public void cadastrarFornecedor() {
+    	Fornecedor f = new Fornecedor(menu.cadastroFornecedor());
+    	loja.getFornecedores().add(f);
+    	System.out.println("Fornecedor cadastrado com sucesso!");
+    }
+    
+    public void alterarFornecedor() {
+    	Scanner sc = new Scanner(System.in);
+    	
+    	System.out.println("\n---- Alteração de Fornecedor ----");
+    	System.out.println("\nDigite o cnpj do fornecedor: ");
 
-    private void adminStateMachine(Admin admin) {
-        switch (this.menu.dashboard(usuario)) {
+		String resposta = sc.nextLine();
+		
+		Fornecedor f = buscarForPorCNPJ(resposta);
+		
+		if (f != null) {
+			
+			f.toString();
+			
+            System.out.print("Novo nome: ");
+            f.setNome(sc.nextLine());
+            System.out.print("Nova descrição: ");
+            f.setDesc(sc.nextLine());
+            System.out.print("Novo e-mail: ");
+            f.setEmail(sc.nextLine());
+            System.out.print("Novo telefone: ");
+            f.setTelefone(sc.nextLine());
+            
+            System.out.print("Nova rua: ");
+            f.getEndereco().setRua(sc.nextLine());
+            System.out.print("Novo número: ");
+            f.getEndereco().setNumero(sc.nextLine());
+            System.out.print("Novo Complemento: ");
+            f.getEndereco().setComplemento(sc.nextLine());
+            System.out.print("Novo bairro: ");
+            f.getEndereco().setBairro(sc.nextLine());
+            System.out.print("Novo cep: ");
+            f.getEndereco().setCep(sc.nextLine());
+            System.out.print("Nova cidade: ");
+            f.getEndereco().setCidade(sc.nextLine());
+            System.out.print("Novo estado: ");
+            f.getEndereco().setEstado(sc.nextLine());
+            
+            System.out.println("Fornecedor alterado com sucesso!");
+        } else {
+            System.out.println("Fornecedor não encontrado!");
+        }
+    	
+    	sc.close();
+    }
+    
+    public void removerFornecedor() {
+    	Scanner sc = new Scanner(System.in);
+    	
+    	System.out.println("\n---- Remoção de Fornecedor ----");
+    	System.out.println("\nDigite o cnpj do fornecedor: ");
 
+		String resposta = sc.nextLine();
+		
+		Fornecedor f = buscarForPorCNPJ(resposta);
+		
+		if (f != null) {
+			
+			loja.getFornecedores().remove(f);
+            
+            System.out.println("Fornecedor alterado com sucesso!");
+        } else {
+            System.out.println("Fornecedor não encontrado!");
+        }
+    	
+    	sc.close();
+    }
+    
+    public void listarFornecedores() {
+    	for (Fornecedor f : loja.getFornecedores()) {
+            System.out.println("\n");
+            f.toString();
         }
     }
 }

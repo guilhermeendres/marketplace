@@ -10,8 +10,8 @@ public class Menu {
 
     public int autenticacao() {
         return (tela.requisitarOpcao(
-                "Autenticação",
-                "Faça login ou cadastre-se",
+                "======== ATENTICAÇÃO ========",
+                "Faça login ou cadastre-se:",
                 new String[]{
                     "Sair",
                     "Login",
@@ -22,19 +22,18 @@ public class Menu {
 
     public int selecaoTipoUsuario() {
         return (tela.requisitarOpcao(
-                "Cadastro",
-                "Selecione o tipo de cadastro",
+                "======== CADASTRO ========",
+                "Selecione o tipo de cadastro:",
                 new String[]{
                     "Voltar",
                     "Admin",
                     "Cliente",
-                    "Fornecedor"
                 }
         ));
     }
 
     public String[] cadastro(Usuario tipoUsuario) {
-        tela.mostrarMensagem("Preencha os dados do usuário");
+        tela.mostrarMensagem("Preencha os dados do usuário:");
         return (tela.requisitarTexto(
                 new String[]{
                     "Nome: ",
@@ -45,18 +44,18 @@ public class Menu {
                     "Número: ",
                     "Complemento: ",
                     "Bairro: ",
-                    "CEP:",
+                    "CEP: ",
                     "Cidade: ",
                     "Estado: ",
-                    tipoUsuario instanceof Fornecedor ? "Descrição: " : tipoUsuario instanceof Cliente ? "Cartão de Crédito: " : ""
+                    tipoUsuario instanceof Cliente ? "Cartão de Crédito: " : ""
                 }
         ));
     }
 
     public String[] login() {
         return (tela.requisitarTexto(
-                "Login",
-                "Por favor, insira seu e-mail e senha",
+                "======== LOGIN ========",
+                "Por favor, insira suas credenciais:",
                 new String[]{
                     "E-mail: ",
                     "Senha: "
@@ -66,7 +65,7 @@ public class Menu {
 
     public int retry(String mensagem) {
         return (tela.requisitarOpcao(
-                "Erro",
+                "Erro:",
                 mensagem,
                 new String[]{
                     "Voltar",
@@ -77,18 +76,12 @@ public class Menu {
 
     public int dashboard(Usuario tipoUsuario) {
         return tela.requisitarOpcao(
-                "Dashboard",
+                "======== DASHBOARD ========",
                 "Selecione uma opção",
                 tipoUsuario instanceof Admin ? new String[]{
                     "Voltar",
                     "Gerenciar Fornecedores",
-                    "Gerenciar Clientes",
                     "Gerenciar Produtos"
-                } : tipoUsuario instanceof Fornecedor ? new String[]{
-                    "Voltar",
-                    "Adicionar Produto",
-                    "Remover Produto",
-                    "Listar Produtos"
                 } : tipoUsuario instanceof Cliente ? new String[]{
                     "Voltar",
                     "Buscar Produto",
@@ -99,9 +92,57 @@ public class Menu {
 
     public String[] buscaProduto() {
         return (tela.requisitarTexto(
-                "Buscar Produto",
+                "---- Buscar Produto ----",
                 new String[]{"Digite o nome do produto que deseja buscar: "}
         ));
     }
+    
+    public int telaFornecedores() {
+        return (tela.requisitarOpcao(
+                "======== FORNECEDORES ========",
+                new String[]{
+                    "Voltar",
+                    "Cadastrar",
+                    "Alterar",
+                    "Remover",
+                    "Listar",
+                    "Buscar"
+                }
+        ));
+    }
+    
+    public int telaBuscaFronecedor() {
+        return (tela.requisitarOpcao(
+                "---- Buscar Fornecedor ----",
+                new String[]{
+                    "Voltar",
+                    "Por nome",
+                    "Por cnpj",
+                }
+        ));
+    }
+    
+    public String[] cadastroFornecedor() {
+    	tela.mostrarMensagem("---- Cadastro de Fornecedor ----");
+        tela.mostrarMensagem("Preencha os dados do fornecedor:");
+        
+        return (tela.requisitarTexto(
+                new String[]{
+                    "Nome: ",
+                    "Descrição",
+                    "Telefone: ",
+                    "E-mail: ",
+                    "CNPJ: ",
+                    "Rua: ",
+                    "Número: ",
+                    "Bairro: ",
+                    "Complemento: ",
+                    "Cidade: ",
+                    "Estado: ",
+                    "CEP: ",
+                }
+        ));
+    }
+
 
 }
