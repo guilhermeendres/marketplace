@@ -46,7 +46,7 @@ public class Estoque {
 
     @Override
     public String toString() {
-        return ("\nProduto #" + this.produto.getCodigo()
+        return ("\nProduto #" + this.produto.getId()
                 + "\nNome: " + this.produto.getNome()
                 + "\nQuantidade em estoque: " + this.quantidade
                 + "\nPreço: " + this.preco);

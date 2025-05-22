@@ -56,7 +56,7 @@ public class Main {
     private void mainStateMachine() {
         switch (this.mainState) {
             case INICIO -> {
-                switch(this.menu.autenticacao()) {
+                switch (this.menu.autenticacao()) {
                     case 2 -> {
                         this.mainState = MainState.LOGIN;
                     }
@@ -124,7 +124,7 @@ public class Main {
                 while (mainState != MainState.LOGIN) {
                     switch (admState) {
                         case INICIO -> {
-                        	Usuario alvo = new Usuario();
+                            Usuario alvo = new Usuario();
                             switch (this.menu.dashboard(usuario)) {
                                 case 2 -> { //Gerenciar Fornecedores
                                     alvo = new Fornecedor();
@@ -142,7 +142,7 @@ public class Main {
                                         }
                                         case 5 -> { //procurar
                                             int tipoBusca = this.menu.pedirTipoBusca();
-                                            switch(tipoBusca) {
+                                            switch (tipoBusca) {
                                                 case 2 -> { //id
                                                     alvo.setId(this.menu.pedirId());
                                                 }
@@ -179,7 +179,7 @@ public class Main {
                                         }
                                         case 5 -> { //procurar
                                             int tipoBusca = this.menu.pedirTipoBusca();
-                                            switch(tipoBusca) {
+                                            switch (tipoBusca) {
                                                 case 2 -> { //id
                                                     alvo.setId(this.menu.pedirId());
                                                 }
@@ -207,8 +207,12 @@ public class Main {
                                             String params[] = this.menu.cadastro(produto);
                                             alvo.setId(Integer.parseInt(params[4]));
                                             alvo = ((Admin) usuario).procurar(alvo);
-                                            produto = new Produto(params, (Fornecedor)alvo);
-                                            ((Admin) usuario).cadastrar(produto);
+                                            produto = new Produto(params, (Fornecedor) alvo);
+                                            if (((Admin) usuario).cadastrar(produto)) {
+                                                this.menu.mensagem("Cadastro Concluído");
+                                            } else {
+                                                this.menu.mensagem("Fornecedor não encontrado");
+                                            }
                                         }
                                         case 3 -> { //Editar
                                             produto.setId(this.menu.pedirId());
@@ -220,7 +224,7 @@ public class Main {
                                         }
                                         case 5 -> {
                                             int tipoBusca = this.menu.pedirTipoBusca();
-                                            switch(tipoBusca) {
+                                            switch (tipoBusca) {
                                                 case 2 -> { //id
                                                     produto.setId(this.menu.pedirId());
                                                 }

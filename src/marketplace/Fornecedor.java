@@ -41,7 +41,7 @@ public class Fornecedor extends Usuario {
 
     public Produto getProduto(int codigo) {
         for (Produto produto : produtos) {
-            if (produto != null && produto.getCodigo() == codigo) {
+            if (produto != null && produto.getId() == codigo) {
                 return produto;
             }
         }

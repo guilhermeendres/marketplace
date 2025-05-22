@@ -61,7 +61,7 @@ public class Menu {
                     "Descrição: ",
                     "Quantidade: ",
                     "Preço: ",
-                    "Código do Fornecedor"
+                    "Código do Fornecedor: "
                 }
         ));
     }
@@ -125,29 +125,29 @@ public class Menu {
     }
 
     public int pedirTipoBusca() {
-        return(tela.requisitarOpcao(
-            "Selecione a opção:",
-            new String[]{
-                "Voltar",
-                "Busca por id",
-                "Busca por nome"
-            }
+        return (tela.requisitarOpcao(
+                "Selecione a opção:",
+                new String[]{
+                    "Voltar",
+                    "Busca por id",
+                    "Busca por nome"
+                }
         ));
     }
 
     public int pedirId() {
         return (tela.requisitarEntradaNumerica(
-            new String[] {
-                "Digite o id do usuario: "
-            }
+                new String[]{
+                    "Digite o id: "
+                }
         ));
     }
 
     public String[] pedirNome() {
         return (tela.requisitarTexto(
-            new String[] {
-                "Digite o nome do usuario: "
-            }
+                new String[]{
+                    "Digite o nome: "
+                }
         ));
     }
 
@@ -172,13 +172,13 @@ public class Menu {
 
     public String[] editar(Produto produto) {
         return (tela.requisitarTexto(
-            new String[]{
-                "Novo nome: ",
-                "Nova descrição: ",
-                "Nova quantidade: ",
-                "Novo preço: "
-            }
-    ));
+                new String[]{
+                    "Novo nome: ",
+                    "Nova descrição: ",
+                    "Nova quantidade: ",
+                    "Novo preço: "
+                }
+        ));
     }
 
     public int procurar(Usuario tipoUsuario) {
@@ -198,4 +198,7 @@ public class Menu {
         ));
     }
 
+    public void mensagem(String mensagem) {
+        this.tela.mostrarMensagem(mensagem);
+    }
 }

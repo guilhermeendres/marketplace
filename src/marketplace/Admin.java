@@ -23,8 +23,12 @@ public class Admin extends Usuario {
         loja.addUsuario(usuario);
     }
 
-    public void cadastrar(Produto produto) {
-        loja.addProduto(produto);
+    public boolean cadastrar(Produto produto) {
+        if (!((this.procurar(produto.getFornecedor())).getNome().isBlank())) {
+            loja.addProduto(produto);
+            return true;
+        }
+        return false;
     }
 
     public void editar(Usuario usuarioEditado) {
@@ -41,41 +45,36 @@ public class Admin extends Usuario {
 
     public Usuario procurar(Usuario usuario) {
 
-            if(usuario instanceof Cliente){
-                if (usuario.getNome().isBlank()) {
-                    return loja.getCliente(usuario.getId()); 
-                }
-                else if(usuario.getId() >= 0){
-                    return loja.getCliente(usuario.getNome());
-                }
+        if (usuario instanceof Cliente) {
+            if (usuario.getNome().isBlank()) {
+                return loja.getCliente(usuario.getId());
+            } else if (usuario.getId() >= 0) {
+                return loja.getCliente(usuario.getNome());
             }
-            else if (usuario instanceof Fornecedor) {
-                if (usuario.getNome().isBlank()) {
-                    return loja.getFornecedor(usuario.getId()); 
-                }
-                else if(usuario.getId() >= 0){
-                    return loja.getFornecedor(usuario.getNome());
-                }
+        } else if (usuario instanceof Fornecedor) {
+            if (usuario.getNome().isBlank()) {
+                return loja.getFornecedor(usuario.getId());
+            } else if (usuario.getId() >= 0) {
+                return loja.getFornecedor(usuario.getNome());
             }
+        }
 
-            return new Usuario();
+        return new Usuario();
     }
 
     public Produto procurar(Produto produto) {
         if (produto.getNome().isBlank()) {
-            return loja.getProduto(produto.getId()); 
-        }
-        else if(produto.getId() >= 0){
+            return loja.getProduto(produto.getId());
+        } else if (produto.getId() >= 0) {
             return loja.getProduto(produto.getNome());
         }
         return new Produto();
     }
 
     public void remover(Usuario usuario) {
-        if(usuario instanceof Cliente){
+        if (usuario instanceof Cliente) {
             usuario = this.loja.getCliente(usuario.getId());
-        }
-        else if (usuario instanceof Fornecedor) {
+        } else if (usuario instanceof Fornecedor) {
             usuario = this.loja.getFornecedor(usuario.getId());
         }
         this.loja.remover(usuario);
