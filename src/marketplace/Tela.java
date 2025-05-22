@@ -183,6 +183,32 @@ public class Tela {
         }
     }
 
+    public int requisitarEntradaNumerica(String opcoes[]) {
+
+        if (opcoes != null && opcoes.length > 0) {
+
+            int entradaNumerica = 0;
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < opcoes.length; i++) {
+                sb.append(i + 1).append(" - ").append(opcoes[i]).append("\n");
+            }
+
+            System.out.print(sb.toString());
+
+            do {
+                entradaNumerica = receberOpcao(scanner.nextLine().trim());
+                if (entradaNumerica < 0 || entradaNumerica > opcoes.length) {
+                    System.out.println("Numero invalido. Tente novamente.");
+                }
+            } while (entradaNumerica < 0 || entradaNumerica > opcoes.length);
+
+            return entradaNumerica;
+        }
+        return 0;
+    }
+
     /**
      * Método para receber um número inteiro de uma string
      *

@@ -48,4 +48,12 @@ public class Cliente extends Usuario {
         this.cartaoCredito = cartaoCredito;
     }
 
+    @Override
+    public String toString() {
+        return ("\n Cliente: " + this.getNome()
+                + "\nID: " + this.getId()
+                + "\nCartão de Crédito: " + this.getCartaoCredito()
+                + "\nTelefone: " + this.getTelefone() + " E-mail: " + this.getEmail());
+    }
+
 }

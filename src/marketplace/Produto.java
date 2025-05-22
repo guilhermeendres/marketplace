@@ -4,17 +4,37 @@ public class Produto {
 
     private String nome;
     private String descricao;
-    private int codigo;
+    private int id;
     private Fornecedor fornecedor;
     private Estoque estoque;
 
-    public Produto(String nome, String descricao, int cod) {
+    public Produto(String nome, String descricao, int id) {
         this.nome = nome;
         this.descricao = descricao;
-        this.codigo = cod;
+        this.id = id;
         this.estoque = new Estoque();
         this.estoque.setQuantidade(0);
         this.estoque.setPreco(0);
+    }
+
+    public Produto () {
+        this.nome = " ";
+        this.descricao = " ";
+        this.id = 0;
+        this.estoque = new Estoque();
+        this.estoque.setQuantidade(0);
+        this.estoque.setPreco(0);
+    }
+
+    public Produto(String params[]) {
+        this.nome = params[0];
+        this.descricao = params[1];
+        this.estoque = new Estoque(Integer.parseInt(params[2]), Double.parseDouble(params[3]));
+    }
+
+    public Produto(String params[], Fornecedor fornecedor) {
+        this(params);
+        this.fornecedor = fornecedor;
     }
 
     public String getNome() {
@@ -33,12 +53,12 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Fornecedor getFornecedor() {
@@ -59,7 +79,7 @@ public class Produto {
 
     @Override
     public String toString() {
-        return ("\nProduto #" + this.codigo
+        return ("\nProduto #" + this.id
                 + "\nNome: " + this.nome
                 + "\nDescrição: " + this.descricao
                 + "\nFornecedor: " + this.fornecedor.getNome()

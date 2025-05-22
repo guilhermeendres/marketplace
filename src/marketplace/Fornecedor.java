@@ -57,6 +57,7 @@ public class Fornecedor extends Usuario {
     @Override
     public String toString() {
         return ("\nFornecedor: " + this.getNome()
+                + "\nID: " + this.getId()
                 + "\nDescrição: " + this.getDescricao()
                 + "\nTelefone: " + this.getTelefone() + " E-mail: " + this.getEmail());
     }

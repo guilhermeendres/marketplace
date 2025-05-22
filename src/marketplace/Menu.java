@@ -53,6 +53,19 @@ public class Menu {
         ));
     }
 
+    public String[] cadastro(Produto produto) {
+        tela.mostrarMensagem("Preencha os dados do produto");
+        return (tela.requisitarTexto(
+                new String[]{
+                    "Nome: ",
+                    "Descrição: ",
+                    "Quantidade: ",
+                    "Preço: ",
+                    "Código do Fornecedor"
+                }
+        ));
+    }
+
     public String[] login() {
         return (tela.requisitarTexto(
                 "Login",
@@ -95,6 +108,87 @@ public class Menu {
                     "Ver Pedidos"
                 } : new String[]{}
         );
+    }
+
+    public int gerenciamento() {
+        return (tela.requisitarOpcao(
+                "Gerenciamento",
+                "Selecione uma opção: ",
+                new String[]{
+                    "Voltar",
+                    "Adicionar",
+                    "Editar",
+                    "Remover",
+                    "Procurar"
+                }
+        ));
+    }
+
+    public int pedirTipoBusca() {
+        return(tela.requisitarOpcao(
+            "Selecione a opção:",
+            new String[]{
+                "Voltar",
+                "Busca por id",
+                "Busca por nome"
+            }
+        ));
+    }
+
+    public int pedirId() {
+        return (tela.requisitarEntradaNumerica(
+            new String[] {
+                "Digite o id do usuario: "
+            }
+        ));
+    }
+
+    public String[] pedirNome() {
+        return (tela.requisitarTexto(
+            new String[] {
+                "Digite o nome do usuario: "
+            }
+        ));
+    }
+
+    public String[] editar(Usuario tipoUsuario) {
+        return (tela.requisitarTexto(
+                new String[]{
+                    "Novo nome: ",
+                    "Novo telefone: ",
+                    "Novo E-mail: ",
+                    "Nova Senha: ",
+                    "Nova Rua: ",
+                    "Novo Número: ",
+                    "Novo Complemento: ",
+                    "Novo Bairro: ",
+                    "Novo CEP:",
+                    "Nova Cidade: ",
+                    "Novo Estado: ",
+                    tipoUsuario instanceof Fornecedor ? "Nova Descrição: " : tipoUsuario instanceof Cliente ? "Novo Cartão de Crédito: " : ""
+                }
+        ));
+    }
+
+    public String[] editar(Produto produto) {
+        return (tela.requisitarTexto(
+            new String[]{
+                "Novo nome: ",
+                "Nova descrição: ",
+                "Nova quantidade: ",
+                "Novo preço: "
+            }
+    ));
+    }
+
+    public int procurar(Usuario tipoUsuario) {
+        return (tela.requisitarOpcao(
+                "Escolha o modo de busca",
+                new String[]{
+                    "Busca por Id",
+                    "Busca por Nome"
+                }
+        ));
     }
 
     public String[] buscaProduto() {

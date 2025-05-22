@@ -6,6 +6,17 @@ public class Estoque {
     private double preco;
     private Produto produto;
 
+    public Estoque(int quantidade, double preco) {
+        this.quantidade = quantidade;
+        this.preco = preco;
+    }
+
+    public Estoque() {
+        this.quantidade = 0;
+        this.preco = 0;
+    }
+
+
     public int getQuantidade() {
         return quantidade;
     }
