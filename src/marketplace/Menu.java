@@ -45,7 +45,7 @@ public class Menu {
                     "Número: ",
                     "Complemento: ",
                     "Bairro: ",
-                    "CEP:",
+                    "CEP: ",
                     "Cidade: ",
                     "Estado: ",
                     tipoUsuario instanceof Fornecedor ? "Descrição: " : tipoUsuario instanceof Cliente ? "Cartão de Crédito: " : ""
@@ -61,7 +61,7 @@ public class Menu {
                     "Descrição: ",
                     "Quantidade: ",
                     "Preço: ",
-                    "Código do Fornecedor"
+                    "Código do Fornecedor: "
                 }
         ));
     }
@@ -162,7 +162,7 @@ public class Menu {
                     "Novo Número: ",
                     "Novo Complemento: ",
                     "Novo Bairro: ",
-                    "Novo CEP:",
+                    "Novo CEP: ",
                     "Nova Cidade: ",
                     "Novo Estado: ",
                     tipoUsuario instanceof Fornecedor ? "Nova Descrição: " : tipoUsuario instanceof Cliente ? "Novo Cartão de Crédito: " : ""
