@@ -105,9 +105,6 @@ public class Main {
                     case 3 -> {
                         usuario = new Cliente(this.menu.cadastro(new Cliente()));
                     }
-                    case 4 -> {
-                        usuario = new Fornecedor(this.menu.cadastro(new Fornecedor()));
-                    }
                     default -> {
                         this.mainState = MainState.INICIO;
                     }
@@ -253,7 +250,7 @@ public class Main {
                         default -> {
                             return;
                         }
-
+                        
                     }
 
                 }

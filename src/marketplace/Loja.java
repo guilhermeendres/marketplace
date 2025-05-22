@@ -138,7 +138,6 @@ public class Loja {
                 return admin;
             }
         }
-
         return new Usuario();
     }
 
