@@ -83,7 +83,7 @@ public class Fornecedor{
     }
     public Produto getProduto(int codigo) {
         for (Produto produto : produtos) {
-            if (produto != null && produto.getCodigo() == codigo) {
+            if (produto != null && produto.getId() == codigo) {
                 return produto;
             }
         }
@@ -92,7 +92,9 @@ public class Fornecedor{
 
     @Override
     public String toString() {
-        return ("\nCNPJ: " + this.getCnpj() + " | Fornecedor: " + this.getNome() + " | Descrição: " + this.getDescricao()
+        return ("\nFornecedor: " + this.getNome()
+                + "\nID: " + this.getId()
+                + "\nDescrição: " + this.getDescricao()
                 + "\nTelefone: " + this.getTelefone() + " | E-mail: " + this.getEmail());
     }
 
